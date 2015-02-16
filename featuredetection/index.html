@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script type='text/javascript'>
+
+      var detect = 'detector';
+
+      var docElement = document.documentElement;
+
+      var matchValue = 21;
+
+      var testRule = function(rule) {
+
+        var supported, style = ['&#173;','<style id="s' + detect + '">', rule, '</style>'].join(''),
+            div = document.createElement('div'),
+            docOverflow,
+            body = document.body,
+            tempBody = document.body || document.createElement('body');
+
+        div.id = detect;
+
+        // add the styles to the body
+        tempBody.innerHTML += style;
+
+        /**
+         * Add the div. If the media features are supported, we can test
+         * if the rules were applied.
+         */
+        tempBody.appendChild(div);
+
+        /**
+         * If body has not loaded, make a copy of the current docElement's overflow rule.
+         * Set overflow = hidden so we don't get scrollbars. Append the tempBody.
+         */
+        if (!body) {
+          //avoid crashing IE8, if background image is used
+          tempBody.style.background = '';
+          //Safari 5.13/5.1.4 OSX stops loading if ::-webkit-scrollbar is used and scrollbars are visible
+          tempBody.style.overflow = 'hidden';
+          docOverflow = docElement.style.overflow;
+          docElement.style.overflow = 'hidden';
+          docElement.appendChild(tempBody);
+        }
+
+        var supported = div.offsetLeft === matchValue;
+
+        if (!body) {
+          alert(supported);
+          docElement.removeChild(tempBody);
+          docElement.style.overflow = docOverflow;
+        } else {
+          div.parentNode.removeChild(div);
+        }
+
+      };
+
+      var i, max, rules = [
+        '@media all and (-webkit-transform-3d), (-moz-transform-3d), (-o-transform-3d) {#' + detect + '{left:' + matchValue + 'px;position:absolute;}}',
+        '@media all and (-webkit-transform-2d), (-moz-transform-2d), (-o-transform-2d) {#' + detect + '{left:' + matchValue + 'px;position:absolute;}}'
+      ];
+
+      for (i = 0, max = rules.length; i < max; i += 1) {
+        testRule(rules[i]);
+      }
+
+    </script>
+  </head>
+<body>
+
+</body>
+</html>

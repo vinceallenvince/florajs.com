@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="keywords" content="JavaScript, Framework, Animation, Natural, System" />
+<meta name="description" content="FloraJS simulates natural systems using JavaScript." />
+<meta name="viewport" content = "user-scalable=no, width=device-width, initial-scale=1.0; maximum-scale=1.0;" />
+<title>FloraJS | Simulate natural systems with JavaScript</title>
+<link rel="stylesheet" href="/css/main.css" type="text/css" charset="utf-8" />
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-9773576-12']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</head>
+<body>
+<div class="wrapper">
+<a name='top'></a>
+<div class="content">
+<div class="content-inner">
+<section>
+<a href='/' class='nav-home'><h1 class="title">Flora<span class='title-suffix'>JS</span></h1></a>
+<section class="navigation">
+<table>
+<tbody>
+<tr>
+<td>- <a href="/about" class="nav-button">about</a></td>
+<td>- <a href="/code" class="nav-button">code</a></td>
+<td>- <a href="/docs" class="nav-button">docs</a></td>
+<td class='cell-twitter'>
+<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://www.florajs.com" data-via="vinceallenvince" data-hashtags="florajs, javascript">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+</td>
+</tr>
+</tbody>
+</table>
+</section>
+<h2 class="section-title">About</h2>
+<p>FloraJS is a JavaScript framework for simulating natural systems in a web browser. In Flora, the "world" is your web browser. DOM elements inhabit the world and behave according to rules meant to simulate a natural environment.</p>
+<p>The formulas driving a large part of Flora are adapted from Daniel Shiffman's <a href='http://natureofcode.com/'>'The Nature of Code'</a>. Inspiration also came from the writings of <a href='http://www.amazon.com/Valentino-Braitenberg/e/B000APA9ZG'>Valentino Braitenberg</a> and <a href='http://mitpress.mit.edu/books/FLAOH/cbnhtml/home.html'>Gary Flake</a>.</p>
+<p>I found it was easier to learn the concepts these writers cover by building my own examples using a common set of classes. Under the hood, the framework describes classes like "Agent", "Sensor", and "Walker" and allows you to easily attach behaviors like "followMouse" or "flock". By creating instances of these classes and adjusting their properties, you can create natural looking systems.</p>
+<p>I chose to code the framework in JavaScript so I could run the simulations in both desktop and mobile web browsers. Devices equipped with accelerometers can exert a gravitational force on the system for an especially realistic simulation.</p>
+<p>All the simulations are animated using DOM rendering. There is no HTML5 Canvas or Flash involved. All modern browsers have been tested. If you see any differences, it's likely in the CSS. If not, <a href='https://github.com/vinceallenvince/FloraJS/issues'>let me know</a>!</p>
+<p>Please check out the <a href='/'>demos</a>.</p>
+</section>
+</div>
+</div>
+<footer class="footer">
+<p>FloraJS | <a href="http://github.com/vinceallenvince/FloraJS">Vince Allen</a></p>
+</footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+  <meta name="keywords" content="JavaScript, Framework, Animation, Natural, System" />
+  <meta name="description" content="FloraJS simulates natural systems using JavaScript." />
+  <meta name="viewport" content = "user-scalable=no, width=device-width, initial-scale=1.0; maximum-scale=1.0;" />
+  <title>Feature detection</title>
+  <script src="modernizr.js" type="text/javascript" charset="utf-8"></script>
+  <style>
+  @media (transform), (-o-transform), (-moz-transform), (-ms-transform), (-webkit-transform) {
+         #detector2d {
+          position: absolute;
+          left: 19px; height: 3px;
+        }
+    }
+  @media (transform-3d), (-o-transform-3d), (-moz-transform-3d), (-ms-transform-3d), (-webkit-transform-3d) {
+         #detector3d {
+          position: absolute;
+          left: 19px; height: 3px;
+        }
+    }
+  </style>
+</head>
+<body>
+  <div id='detector2d'></div>
+  <div id='detector3d'></div>
+  <script type="text/javascript" charset="utf-8">
+
+    var docFrag, div, styles = [], check, results;
+
+    var features = {
+      transforms3d: false,
+      transforms2d: false,
+      touch: false
+    };
+
+    var props = {
+      x: 1,
+      y: 1,
+      a: 1,
+      s: 1
+    };
+
+    var transforms2d = [
+      '-webkit-transform: translateX(' + props.x + 'px) translateY(' + props.y + 'px)',
+      '-moz-transform: translateX(' + props.x + 'px) translateY(' + props.y + 'px)',
+      '-o-transform: translateX(' + props.x + 'px) translateY(' + props.y + 'px)',
+      '-ms-transform: translateX(' + props.x + 'px) translateY(' + props.y + 'px)'
+    ].join(';');
+
+    var transforms3d = [
+      '-webkit-transform: translateX(' + props.x + 'px) translateY(' + props.y + 'px) translateZ(0)',
+      '-moz-transform: translateX(' + props.x + 'px) translateY(' + props.y + 'px) translateZ(0)',
+      '-o-transform: translateX(' + props.x + 'px) translateY(' + props.y + 'px) translateZ(0)',
+      '-ms-transform: translateX(' + props.x + 'px) translateY(' + props.y + 'px) translateZ(0)'
+    ].join(';');
+
+    // 2d
+
+    docFrag = document.createDocumentFragment();
+    div = document.createElement('div');
+    document.body.appendChild(div);
+
+    /*div.style.cssText = transforms2d;
+
+    document.write('<p><b>transforms2d</b></p>');
+    document.write('<p>cssText: ' + div.style.cssText + '</p>');
+    document.write('<p>transform: ' + div.style.transform + '</p>');
+    document.write('<p>webkitTransform: ' + div.style.webkitTransform + '</p>');
+    document.write('<p>MozTransform: ' + div.style.MozTransform + '</p>');
+    document.write('<p>OTransform: ' + div.style.OTransform + '</p>');
+    document.write('<p>msTransform: ' + div.style.msTransform + '</p>');
+
+    styles = [
+      div.style.transform,
+      div.style.webkitTransform,
+      div.style.MozTransform,
+      div.style.OTransform,
+      div.style.msTransform
+    ];
+    check = false;
+
+    for (var i = 0; i < styles.length; i += 1) {
+      if (styles[i]) {
+        check = true;
+        break;
+      }
+    }
+
+    features.transforms2d = check;*/
+
+    /*styles = [
+      'transform',
+      'WebkitTransform',
+      'MozTransform',
+      'OTransform',
+      'msTransform'
+    ];
+
+    for (var i = 0; i < styles.length; i += 1) {
+      div.style[styles[i]] = 'translateX(1px) translateY(1px)';
+    }
+
+    document.write('<p>cssText: ' + div.style.cssText + '</p>');
+
+    if (div.style.cssText) {
+      features.transforms2d = true;
+    }*/
+
+    var c = document.getElementById('detector2d');
+
+    if (c.offsetLeft === 19) {
+      features.transforms2d = true;
+    }
+
+
+    // 3D
+
+    docFrag = document.createDocumentFragment();
+    div = document.createElement('div');
+    document.body.appendChild(div);
+    /*div.style.cssText = transforms3D;
+
+    document.write('<p><b>transforms3D</b></p>');
+    document.write('<p>cssText: ' + div.style.cssText + '</p>');
+    document.write('<p>transform: ' + div.style.transform + '</p>');
+    document.write('<p>webkitTransform: ' + div.style.webkitTransform + '</p>');
+    document.write('<p>MozTransform: ' + div.style.MozTransform + '</p>');
+    document.write('<p>OTransform: ' + div.style.OTransform + '</p>');
+    document.write('<p>msTransform: ' + div.style.msTransform + '</p>');
+
+    styles = [
+      div.style.transform,
+      div.style.webkitTransform,
+      div.style.MozTransform,
+      div.style.OTransform,
+      div.style.msTransform
+    ];
+    check = false;
+
+    for (var i = 0; i < styles.length; i += 1) {
+      if (styles[i]) {
+        check = true;
+        break;
+      }
+    }
+
+    features.transforms3D = check;*/
+
+
+    /*styles = [
+      'transform',
+      'WebkitTransform',
+      'MozTransform',
+      'OTransform',
+      'msTransform'
+    ];
+
+    for (var i = 0; i < styles.length; i += 1) {
+      div.style[styles[i]] = 'translateX(1px) translateY(1px) translateZ(1px)';
+    }
+
+    document.write('<p>cssText: ' + div.style.cssText + '</p>');
+
+    if (div.style.cssText) {
+      features.transforms3d = true;
+    }*/
+
+    var d = document.getElementById('detector3d');
+
+    if (d.offsetLeft === 19) {
+      features.transforms3d = true;
+    }
+
+    //
+
+    if(('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch) {
+      features.touch = true;
+    } else {
+      features.touch = false;
+    }
+
+    //
+
+    document.write('<p><b>Feature Detect</b></p>');
+    document.write('<p>2d Transforms: ' + features.transforms2d + '</p>');
+    document.write('<p>3d Transforms: ' + features.transforms3d + '</p>');
+    document.write('<p>Touch: ' + features.touch + '</p>');
+
+    document.write('<p><b>Modernizr</b></p>');
+    document.write('<p>2d Transforms: ' + Modernizr.csstransforms + '</p>');
+    document.write('<p>3d Transforms: ' + Modernizr.csstransforms3d + '</p>');
+    document.write('<p>Touch: ' + Modernizr.touch + '</p>');
+
+    if (features.transforms2d === Modernizr.csstransforms &&
+        features.transforms3d === Modernizr.csstransforms3d &&
+        features.touch === Modernizr.touch) {
+      results = document.createElement('div');
+      results.innerHTML = '<p><b style="color: green">Feature Detect matches Modernizr</b></p>';
+      document.body.insertBefore(results, document.body.firstChild);
+    } else {
+      results = document.createElement('div');
+      results.innerHTML = '<p><b style="color: red">Feature Detect does not match Modernizr</b></p>';
+      document.body.insertBefore(results, document.body.firstChild);
+    }
+
+    /*
+
+    function isTouchDevice() {
+   var el = document.createElement('div');
+   el.setAttribute('ongesturestart', 'return;');
+   if(typeof el.ongesturestart == "function"){
+      return true;
+   }else {
+      return false
+   }
+}
+    */
+
+    /*var hasFeatures = [
+      {
+        name: 'Core1',
+        hasFeature: document.implementation.hasFeature('Core', '1.0')
+      },
+      {
+        name: 'Core2',
+        hasFeature: document.implementation.hasFeature('Core', '2.0')
+      },
+      {
+        name: 'Core3',
+        hasFeature: document.implementation.hasFeature('Core', '3.0')
+      },
+      {
+        name: 'CSS',
+        hasFeature: document.implementation.hasFeature('CSS', '2.0')
+      },
+      {
+        name: 'CSS2',
+        hasFeature: document.implementation.hasFeature('CSS2', '2.0')
+      },
+      {
+        name: 'CSS3',
+        hasFeature: document.implementation.hasFeature('CSS3', '2.0')
+      },
+      {
+        name: 'MouseEvents2',
+        hasFeature: document.implementation.hasFeature('MouseEvents', '2.0')
+      },
+      {
+        name: 'MouseEvents3',
+        hasFeature: document.implementation.hasFeature('MouseEvents', '3.0')
+      }
+    ];
+
+    for (var i = 0, max = hasFeatures.length; i < max; i += 1) {
+      document.write('<p>' + hasFeatures[i].name + ': ' + hasFeatures[i].hasFeature + '</p>');
+    }*/
+
+
+
+  </script>
+</body>
+</html>

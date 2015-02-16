@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv='content-type' content='text/html; charset=UTF-8' />
+  <meta name='viewport' content='user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0' />
+  <meta name='apple-mobile-web-app-capable' content='yes' />
+  <title>Leap</title>
+  <link href='css/burner.css' rel='stylesheet' type='text/css' charset='utf-8' />
+  <link href='css/flora.css' rel='stylesheet' type='text/css' charset='utf-8' />
+  <link href='css/FloraJSLeap.min.css' rel='stylesheet' type='text/css' charset='utf-8' />
+  <script src='scripts/leap.js' type='text/javascript' charset='utf-8'></script>
+  <script src='scripts/burner.js' type='text/javascript' charset='utf-8'></script>
+  <script src='scripts/flora.js' type='text/javascript' charset='utf-8'></script>
+  <script src='scripts/FloraJSLeap.min.js' type='text/javascript' charset='utf-8'></script>
+  </head>
+  <body>
+
+    <script type='text/javascript' charset='utf-8'>
+
+      var controller = FloraJSLeap.init();
+
+      // creates a 300mm invisibile box over the Leap controller
+      var interactionBox = new Leap.InteractionBox({
+        center: [0, 150, 0],
+        size: [300, 300, 300]
+      });
+
+      var handID = null;
+
+      controller.on('animationFrame', function(frame) {
+
+        var agents = Burner.System.getAllItemsByName('Agent'),
+            hands = frame.hands;
+
+        /**
+         * If there are no hands or fingers,
+         * remove target from all agents.
+         */
+        if (!hands[0] || !hands[0].fingers[0]) {
+          for (var i = 0; i < agents.length; i++) {
+            agents[i].seekTarget = null;
+          }
+          return;
+        }
+
+        if (handID !== hands[0].id) {
+          FloraJSLeap.PubSub.publish('active');
+          handID = hands[0].id;
+        }
+
+        var fingers = hands[0].fingers;
+
+        // get the finger tip position
+        var pt = fingers[0].stabilizedTipPosition;
+
+        // normalize it based on the interactionBox
+        var norm = interactionBox.normalizePoint(pt, true);
+
+        // map the point to Flora world coords
+        var width = Burner.System.firstWorld().width;
+        var height = Burner.System.firstWorld().height;
+        var x = Burner.System.map(norm[0], 0, 1, 0, width);
+        var y = Burner.System.map(norm[1], 0, 1, height, 0);
+
+        // create and set a target
+        var target = {
+          location: {
+            x: x,
+            y: y
+          }
+        };
+        for (var i = 0; i < agents.length; i++) {
+          agents[i].seekTarget = target;
+        }
+
+      });
+
+      Burner.System.init(function() {
+
+        var colorPal = new Flora.ColorPalette();
+
+        colorPal.addColor({
+          min: 12,
+          max: 24,
+          startColor: [243, 76, 7],
+          endColor: [103, 36, 0]
+        });
+
+        for (var i = 0; i < 40; i++) {
+          var size = Burner.System.getRandomNumber(10, 50);
+          var location = new Burner.Vector(Burner.System.firstWorld().width / 2, Burner.System.firstWorld().height / 2);
+          var offset = new Burner.Vector(1, 1);
+          offset.normalize();
+          offset.rotate(Burner.System.getRandomNumber(0, 360));
+          offset.mult(Burner.System.getRandomNumber(10, 50));
+          location.add(offset);
+          this.add('Agent', {
+            location: location,
+            width: size * 0.8,
+            height: size,
+            mass: size * 2,
+            opacity: Burner.System.map(size, 10, 50, 0.9, 0.7),
+            flocking: true,
+            color: colorPal.getColor()
+          });
+        }
+
+      });
+    </script>
+  </body>
+</html>

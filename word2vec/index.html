@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+  <html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <title>Flora</title>
+    <link rel="stylesheet" href="css/burner.css" type="text/css" charset="utf-8" />
+    <link rel="stylesheet" href="css/flora.css" type="text/css" charset="utf-8" />
+    <link rel="stylesheet" href="css/word2vecpunk.min.css" type="text/css" charset="utf-8" />
+    <script src="scripts/burner.js" type="text/javascript" charset="utf-8"></script>
+    <script src="scripts/flora.js" type="text/javascript" charset="utf-8"></script>
+    <script src="scripts/word2vecpunk.min.js" type="text/javascript" charset="utf-8"></script>
+  </head>
+  <body>
+    <script type="text/javascript" charset="utf-8">
+
+      //Burner.Classes = word2vecpunk;
+
+      var keyword = 'Jazz';
+
+      var data = exports[keyword];
+
+      // start the system; pass initial instructions
+      Burner.System.init(function() {
+
+        var mainWord = this.add('Agent', {
+          color: 'transparent'
+        });
+        mainWord.el.classList.add('mainWord');
+        mainWord.el.textContent = keyword;
+        var mainRect = mainWord.el.getBoundingClientRect();
+        mainWord.width = mainRect.width;
+        mainWord.height = mainRect.height;
+
+        for (var i = 0, max = data.length; i < max; i++) {
+          var vector = new Burner.Vector(100, 100);
+          vector.normalize();
+          vector.rotate(Flora.Utils.degreesToRadians(Flora.Utils.map(data[i].distance, 0, data[0].distance, 1, 2880)));
+          vector.mult(Flora.Utils.map(data[i].distance, 0, data[0].distance, this.firstWorld().width / 1.5, 200));
+          vector.add(new Burner.Vector(this.firstWorld().width / 2, this.firstWorld().height / 2));
+          var agent = this.add('Agent', {
+            seekTarget: {
+              location: vector
+            },
+            color: 'transparent',
+            opacity: Flora.Utils.map(data[i].distance, 0.5, data[0].distance, 0, 1)
+          });
+          agent.el.classList.add('word');
+          agent.el.textContent = data[i].name
+          var rect = agent.el.getBoundingClientRect();
+          agent.width = rect.width;
+          agent.height = rect.height;
+        }
+        
+      }, {
+        gravity: new Burner.Vector()
+      });
+    </script>
+  </body>
+</html>

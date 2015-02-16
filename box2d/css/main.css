@@ -1,0 +1,137 @@
+/* http://meyerweb.com/eric/tools/css/reset/ */
+/* v1.0 | 20080212 */
+/* reset */
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{border:0;font-size:100%;vertical-align:baseline;background:transparent;margin:0;padding:0;}body{line-height:1;}ol,ul{list-style:none;}blockquote,q{quotes:none;}blockquote:before,blockquote:after,q:before,q:after{content:none;}:focus{outline:0;}ins{text-decoration:none;}del{text-decoration:line-through;}table{border-collapse:collapse; border-spacing:0;}
+
+/* */
+
+.floraElement {
+  position: absolute; left: 0; top: 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body {
+  background: rgb(0, 0, 0);
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.world {
+  background: rgb(0, 0, 0);
+  position: absolute;
+  margin: 0 auto;
+  z-index: 0;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+.box {
+  background: rgb(250, 100, 50);
+  border-color: rgb(255, 255, 255);
+  border-width: 0.25em;
+  border-style: solid;
+  border-radius: 0;
+  box-shadow: 0 0 10px 10px rgba(200, 200, 200, 0.25);
+}
+
+.ball {
+  background: rgb(0, 174, 239);
+  border-color: rgb(255, 255, 255);
+  border-width: 0.25em;
+  border-style: dashed;
+  border-radius: 100%;
+  box-shadow: 0 0 10px 10px rgba(200, 200, 200, 0.25);
+}
+
+.wall {
+  background: rgb(200, 200, 200);
+  border-color: rgb(255, 255, 255);
+  border-width: 0.25em;
+  border-style: solid;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.joint {
+  background: transparent;
+  border-top-width: 2px;
+  border-top-style: dotted;
+  border-top-color: rgb(255, 255, 255);
+  border-top-color: rgba(255, 255, 255, 0.5);
+}
+
+/* CAPTION / INPUT MENU */
+.caption, .inputMenu {
+  width: auto;
+  position: absolute;
+  font-family: "Franklin Gothic Medium", "Franklin Gothic", "ITC Franklin Gothic", Arial, sans-serif;
+  color: rgb(0, 0, 0);
+  text-align: center;
+  cursor: default;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -o-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.caption.top.left, .inputMenu.top.left {
+  bottom: 90%; left: 0;
+}
+
+.caption.top.center, .inputMenu.top.center {
+  width: 100%;
+  text-align: center;
+  margin: 0 auto;
+  bottom: 90%;
+}
+
+.caption.top.right, .inputMenu.top.right {
+  bottom: 90%; right: 0;
+}
+
+.caption.bottom.left, .inputMenu.bottom.left {
+  top: 90%; left: 0;
+}
+
+.caption.bottom.center, .inputMenu.bottom.center {
+  width: 100%;
+  text-align: center;
+  margin: 0 auto;
+  top: 90%;
+}
+
+.caption.bottom.right, .inputMenu.bottom.right {
+  top: 90%; right: 0;
+}
+
+
+/* STATS */
+.statsDisplay {
+  position: fixed;
+  display: inline-block;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.75);
+  border-bottom: 1px solid rgb(50, 50, 50);
+  border-right: 1px solid rgb(50, 50, 50);
+  color: rgb(255, 255, 255);
+  padding: 0.35em;
+  font-family: Helvetica;
+  font-size: 0.85em;
+}
+
+.statsDisplayLabel {
+  display: inline-block;
+  color: rgb(150, 150, 150);
+  margin-left: 0.75em;
+}
+
+.statsDisplayLabel:first-child {
+  margin-left: 0;
+}
